@@ -1,7 +1,7 @@
 ```
     python -m venv venv
     
-    python -m pipi install --upgrade pip
+    python -m pip install --upgrade pip
     
     https://pypi.org/project/Django/
     pip install django
