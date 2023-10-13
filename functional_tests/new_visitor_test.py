@@ -5,6 +5,8 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
+from utils.in_tests_use.decorators_for_tests_use import print_finish_message
+
 
 class NewVisitorTest(unittest.TestCase):
 
@@ -14,6 +16,7 @@ class NewVisitorTest(unittest.TestCase):
     def tearDown(self):
         self.browser.quit()
 
+    @print_finish_message
     def test_can_start_a_list_and_retrieve_it_later(self):
         self.browser.get('http://localhost:8000/todo/')
 
@@ -32,8 +35,6 @@ class NewVisitorTest(unittest.TestCase):
         table = self.browser.find_element(By.ID, 'id_list_table')
         rows = table.find_element(By.TAG_NAME, 'tr')
         self.assertTrue(any(row.text == '1: Buy peacock feathers' for row in rows))
-
-        print("Finish test_can_start_a_list_and_retrieve_it_later SUCCESSFULLY!")
 
 
 if __name__ == "__main__":
