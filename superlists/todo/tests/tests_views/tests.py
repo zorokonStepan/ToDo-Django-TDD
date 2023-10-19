@@ -18,3 +18,7 @@ class HomePageTest(TestCase):
 
         self.assertIn('A new list item', response.content.decode())
         self.assertTemplateUsed(response, 'todo/home.html')
+
+    def test_only_saves_items_when_necessary(self):
+        self.client.get('/todo/')
+        self.assertEqual(Item.objects.count(), 0)
