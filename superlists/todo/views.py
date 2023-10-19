@@ -8,6 +8,4 @@ def home_page(request: HttpRequest) -> HttpResponse:
     item = Item()
     item.text = request.POST.get('item_text', '')
     item.save()
-    return render(request, 'todo/home.html', {
-        'new_item_text': request.POST.get('item_text', ''),
-    })
+    return render(request, 'todo/home.html', {'new_item_text': item.text})
