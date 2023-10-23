@@ -9,4 +9,5 @@ def home_page(request: HttpRequest) -> HttpResponse:
         Item.objects.create(text=request.POST['item_text'])
         return redirect('/todo/')
 
-    return render(request, 'todo/home.html')
+    items = Item.objects.all()
+    return render(request, 'todo/home.html', {'items': items})

@@ -29,9 +29,12 @@ class NewVisitorTest(unittest.TestCase):
         header_text = self.browser.find_element(By.TAG_NAME, 'h1').text
         self.assertIn('To-Do', header_text)
 
-        # input_box.send_keys(Keys.ENTER)
-        # time.sleep(1)
-        # self.check_for_row_in_list_table('1: Buy peacock feathers')
+        input_box = self.browser.find_element(By.ID, 'id_new_item')
+        input_box.send_keys('Buy peacock feathers')
+        input_box.send_keys(Keys.ENTER)
+        time.sleep(1)
+
+        self.check_for_row_in_list_table('1: Buy peacock feathers')
 
         input_box = self.browser.find_element(By.ID, 'id_new_item')
         input_box.send_keys('Make a fly from peacock feathers')
