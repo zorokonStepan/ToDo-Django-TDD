@@ -5,8 +5,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from django.test import LiveServerTestCase
 
-from utils.in_tests_use.decorators_for_tests_use import print_finish_message
-
 
 class NewVisitorTest(LiveServerTestCase):
 
@@ -21,9 +19,8 @@ class NewVisitorTest(LiveServerTestCase):
         rows = table.find_elements(By.TAG_NAME, 'tr')
         self.assertIn(row_text, [row.text for row in rows])
 
-    @print_finish_message
     def test_can_start_a_list_and_retrieve_it_later(self):
-        self.browser.get(self.live_server_url)
+        self.browser.get(f'{self.live_server_url}/todo/')
 
         self.assertIn('To-Do', self.browser.title)
         header_text = self.browser.find_element(By.TAG_NAME, 'h1').text
