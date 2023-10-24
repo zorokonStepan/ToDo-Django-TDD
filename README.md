@@ -1,1 +1,1 @@
-python -V 3.11.1
+Training project for developing a TODO application using the TDD methodology.
