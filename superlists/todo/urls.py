@@ -1,8 +1,9 @@
-from django.urls import path
+from django.urls import re_path
 
-from .views import home_page
+from .views import home_page, view_list
 
 
 urlpatterns = [
-    path('', home_page, name="home"),
+    re_path('^one-of-a-kind-list-in-the-world/$', view_list, name='view_list'),
+    re_path('^$', home_page, name="home"),
 ]
