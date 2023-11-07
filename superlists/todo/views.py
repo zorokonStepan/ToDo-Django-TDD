@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render, redirect
 
-from .models import Item
+from .models import Item, List
 
 
 def home_page(request: HttpRequest) -> HttpResponse:
@@ -15,5 +15,6 @@ def view_list(request: HttpRequest) -> HttpResponse:
 
 def new_list(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
-        Item.objects.create(text=request.POST['item_text'])
+        list_ = List.objects.create()
+        Item.objects.create(text=request.POST['item_text'], list=list_)
     return redirect('/todo/one-of-a-kind-list-in-the-world/')

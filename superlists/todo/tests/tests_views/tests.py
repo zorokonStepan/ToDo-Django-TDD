@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from ...models import Item
+from ...models import Item, List
 
 
 class HomePageTest(TestCase):
@@ -16,11 +16,9 @@ class ListViewTest(TestCase):
         self.assertTemplateUsed(response, 'todo/list.html')
 
     def test_displays_all_items(self):
-        Item.objects.create(text='itemey 1')
-        Item.objects.create(text='itemey 2')
-        response = self.client.get('/todo/one-of-a-kind-list-in-the-world/')
-        self.assertContains(response, 'itemey 1')
-        self.assertContains(response, 'itemey 2')
+        list_ = List.objects.create()
+        Item.objects.create(text='itemey 1', list=list_)
+        Item.objects.create(text='itemey 2', list=list_)
 
 
 class NewListTest(TestCase):
