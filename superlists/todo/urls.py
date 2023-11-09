@@ -1,10 +1,11 @@
-from django.urls import re_path
+from django.urls import path
 
-from .views import home_page, view_list, new_list
+from .views import home_page, view_list, new_list, add_item
 
 
 urlpatterns = [
-    re_path('^$', home_page, name="home"),
-    re_path('^new/$', new_list, name='new_list'),
-    re_path('^one-of-a-kind-list-in-the-world/$', view_list, name='view_list'),
+    path('', home_page, name="home"),
+    path("new", new_list, name="new_list"),
+    path("<int:list_id>/", view_list, name="view_list"),
+    path("<int:list_id>/add_item", add_item, name="add_item"),
 ]

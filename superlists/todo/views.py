@@ -8,13 +8,18 @@ def home_page(request: HttpRequest) -> HttpResponse:
     return render(request, 'todo/home.html')
 
 
-def view_list(request: HttpRequest) -> HttpResponse:
-    items = Item.objects.all()
-    return render(request, 'todo/list.html', {'items': items})
+def new_list(request):
+    _list = List.objects.create()
+    Item.objects.create(text=request.POST["item_text"], list=_list)
+    return redirect(f"/todo/{_list.id}/")
 
 
-def new_list(request: HttpRequest) -> HttpResponse:
-    if request.method == "POST":
-        list_ = List.objects.create()
-        Item.objects.create(text=request.POST['item_text'], list=list_)
-    return redirect('/todo/one-of-a-kind-list-in-the-world/')
+def view_list(request, list_id):
+    _list = List.objects.get(id=list_id)
+    return render(request, "todo/list.html", {"list": _list})
+
+
+def add_item(request, list_id):
+    _list = List.objects.get(id=list_id)
+    Item.objects.create(text=request.POST["item_text"], list=_list)
+    return redirect(f"/todo/{_list.id}/")
